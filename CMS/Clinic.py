@@ -6,6 +6,7 @@ from datetime import date as dt
 # Reading and storing the necessary CSV files into dataframes
 p_d = pd.read_csv('CSV/Patients_Details.csv')
 a_d = pd.read_csv('CSV/Admin_Details.csv')
+appoint= pd.read_csv('CSV/Appointment.csv')
 
 
 def create_patient_account():
