@@ -1,6 +1,6 @@
 # Clinic-Management-System
 
-✨ Streamlining Patient Data Management ✨
+✨ Clinic-Management-System ✨
 
 Key Features:
 
