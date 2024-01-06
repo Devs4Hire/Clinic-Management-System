@@ -114,6 +114,22 @@ def graph():
         print("Invalid Option")
 
 
+def make_appoint():
+    # Add the patient's details to the dataframe
+    pid = len(p_d) + 1
+    pname = input("Enter Patient First Name: ")
+    plname = input("Enter Patient Last Name: ")
+    pgender = input("Enter Patient Gender(M/F): ")
+    pbday = input("Enter Patient Date of Birth (dd-mm-yyyy): ")
+    pcontact = input("Enter Patient Contact Number: ")
+    pemail = input("Enter Patient Gmail Address: ")
+    pallergies = input("Enter Patient Allergies(If Any): ")
+    p_d.loc[len(p_d.index)] = [pid, pname, plname, pgender, dt.today() , pbday, pcontact, pemail, pallergies]
+
+    # Save the dataframe to the CSV file
+    p_d.to_csv('CSV/Appointment.csv', index=False)
+    print("New Patient detail is entered")
+
 def menu():
     while True:
         print("\n1. Create Patient Account\n2. Patient Details\n3. Update Patient Account\n4. Delete Patient Details\n5. Graph\n6. Exit")
