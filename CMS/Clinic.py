@@ -23,8 +23,7 @@ def create_patient_account():
 
     # Save the dataframe to the CSV file
     p_d.to_csv('CSV/Patients_Details.csv', index=False)
-    print("Congratulations")
-    print("New Account Created")
+    print("New Patient detail is entered")
 
 
 def update_patient_details():
