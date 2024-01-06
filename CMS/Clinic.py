@@ -116,19 +116,23 @@ def graph():
 
 def make_appoint():
     # Add the patient's details to the dataframe
-    pid = len(p_d) + 1
-    pname = input("Enter Patient First Name: ")
-    plname = input("Enter Patient Last Name: ")
-    pgender = input("Enter Patient Gender(M/F): ")
-    pbday = input("Enter Patient Date of Birth (dd-mm-yyyy): ")
-    pcontact = input("Enter Patient Contact Number: ")
-    pemail = input("Enter Patient Gmail Address: ")
-    pallergies = input("Enter Patient Allergies(If Any): ")
-    p_d.loc[len(p_d.index)] = [pid, pname, plname, pgender, dt.today() , pbday, pcontact, pemail, pallergies]
+    pid = input("Enter Patient First Name: ")
 
-    # Save the dataframe to the CSV file
-    p_d.to_csv('CSV/Appointment.csv', index=False)
-    print("New Patient detail is entered")
+    if (pid[p_d['Patient_ID'] != pid ]).any():
+        print('Patient ID is not available')
+        menu()
+    else:
+        pappoint = input("Enter Aapointment ID: ")
+        psch = input("Enter Schedule Day: ")
+        page = pid.iat[p_d['Patient_ID'] != pid , : ]
+        no_show = None
+        
+        appoint.loc[len(appoint.index)] = [pid, pappoint , psch , page , no_show]
+
+        # Save the dataframe to the CSV file
+        p_d.to_csv('CSV/Appointment.csv', index=False)
+        print("Appointment is made")
+
 
 def menu():
     while True:
@@ -146,6 +150,8 @@ def menu():
         elif option == 4:
             patient_delete()
         elif option == 6:
+            make_appoint()
+        elif option == 7:
             break
         else:
             print("Invalid Option")
