@@ -1,0 +1,4 @@
+Patient_ID,Name,Lname,Gender,Date,DOB,Phone_no,Mail,Allergies
+2,Rashi,Martin,F,22-12-2023,04-10-06,8329459879,wm@gmail.com,
+3,James,Jones,M,22-12-2023,05-10-06,8293843976,jj@gmail.com,
+4,Charles,Johnson,M,22-12-2023,06-10-06,6237849574,cj@gmail.com,
