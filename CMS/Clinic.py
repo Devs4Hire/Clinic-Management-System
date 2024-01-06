@@ -108,7 +108,25 @@ def graph():
         plt.show()
 
     elif g_ch == 2:
-        pass
+    # Convert the 'AppointmentDate' column to datetime format
+        appoint['AppointmentDay'] = pd.to_datetime(appoint['AppointmentDay'])
+
+        # Extract month from the 'AppointmentDate' column and create a new column
+        appoint['Month'] = appoint['AppointmentDay'].dt.to_period('M')
+
+        # Group by month and count the number of bookings
+        monthly_bookings = appoint.groupby('Month').size()
+
+        # Plotting
+        plt.figure(figsize=(10, 6))
+        monthly_bookings.plot(kind='bar', color='skyblue')
+        plt.title('Number of Bookings per Month')
+        plt.xlabel('Month')
+        plt.ylabel('Number of Bookings')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()
+        #pass
   
     else:
         print("Invalid Option")
