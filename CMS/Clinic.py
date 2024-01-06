@@ -120,13 +120,13 @@ def graph():
         # Plotting
         plt.figure(figsize=(10, 6))
         monthly_bookings.plot(kind='bar', color='skyblue')
-        plt.title('Number of Bookings per Month')
+        plt.title('Number of Appointments per Month')
         plt.xlabel('Month')
-        plt.ylabel('Number of Bookings')
+        plt.ylabel('Number of Appointments')
         plt.xticks(rotation=45)
         plt.tight_layout()
         plt.show()
-        #pass
+        
   
     else:
         print("Invalid Option")
