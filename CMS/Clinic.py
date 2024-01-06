@@ -134,7 +134,7 @@ def graph():
 
 def make_appoint():
     # Add the patient's details to the dataframe
-    pid = input("Enter Patient First Name: ")
+    pid = input("Enter Patient Id: ")
 
     if (pid[p_d['Patient_ID'] != pid ]).any():
         print('Patient ID is not available')
