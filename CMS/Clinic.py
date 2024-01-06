@@ -132,29 +132,37 @@ def graph():
         print("Invalid Option")
 
 
-def make_appoint():
+def make_book_appointment(appoint):
     # Add the patient's details to the dataframe
     pid = input("Enter Patient Id: ")
+    available_patient = p_d[(p_d['Patient_ID'] == int(pid))]
 
-    if (pid[p_d['Patient_ID'] != pid ]).any():
+    if available_patient.empty:
         print('Patient ID is not available')
         menu()
     else:
-        pappoint = input("Enter Aapointment ID: ")
-        psch = input("Enter Schedule Day: ")
-        page = pid.iat[p_d['Patient_ID'] != pid , : ]
-        no_show = None
+        pappoint = input("Enter Appointment ID: ")
+        psch = input("Enter Schedule Day (yyyy-mm-dd): ")  # Adjusted input format
         
-        appoint.loc[len(appoint.index)] = [pid, pappoint , psch , page , no_show]
+        # Calculate patient's age based on date of birth
+        dob = available_patient['DOB'].values[0]
+        today = pd.to_datetime('today').date()
+        age = today.year - pd.to_datetime(dob).year - ((today.month, today.day) < (pd.to_datetime(dob).month, pd.to_datetime(dob).day))
+        
+        no_show = 'No'  # Assuming default value for No-show is 'No'
+        
+        # Adding the appointment details to the 'Appointment.csv' dataframe
+        appoint.loc[len(appoint.index)] = [pid, pappoint, pd.to_datetime(psch), pd.to_datetime(psch).date(), age, no_show]
 
         # Save the dataframe to the CSV file
-        p_d.to_csv('CSV/Appointment.csv', index=False)
+        appoint.to_csv('CSV/Appointment.csv', index=False)
         print("Appointment is made")
 
 
-def menu():
+
+def menu(appoint):
     while True:
-        print("\n1. Create Patient Account\n2. Patient Details\n3. Update Patient Account\n4. Delete Patient Details\n5. Graph\n6. Exit")
+        print("\n1. Create Patient Account\n2. Patient Details\n3. Update Patient Account\n4. Delete Patient Details\n5. Graph\n6.Book Appointment\n7. Exit")
         option = int(input("Enter Option Number: "))
 
         if option == 1:
@@ -168,7 +176,7 @@ def menu():
         elif option == 4:
             patient_delete()
         elif option == 6:
-            make_appoint()
+            make_book_appointment(appoint)
         elif option == 7:
             break
         else:
@@ -176,7 +184,7 @@ def menu():
 
 
 
-def admin_login():
+def admin_login(appoint):
     # Search for the admin in the dataframe
     login_id = int(input("Enter Your Login ID: "))
     login_pass = input("Enter your Password: ")
@@ -189,8 +197,8 @@ def admin_login():
     else:
         # Print the admin's details
         print("You Are Now Logged In")
-        menu()
+        menu(appoint)
 
-admin_login()
+admin_login(appoint)
 
 
