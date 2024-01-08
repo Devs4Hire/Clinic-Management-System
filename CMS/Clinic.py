@@ -9,17 +9,24 @@ a_d = pd.read_csv('CSV/Admin_Details.csv')
 appoint= pd.read_csv('CSV/Appointment.csv')
 
 
+def calculateAge(birthDate):
+    today = dt.today()
+    age = today.year - birthDate.year - ((today.month, today.day) < (birthDate.month, birthDate.day))
+    return age
+
 def create_patient_account():
     # Add the patient's details to the dataframe
     pid = len(p_d) + 1
     pname = input("Enter Patient First Name: ")
     plname = input("Enter Patient Last Name: ")
     pgender = input("Enter Patient Gender(M/F): ")
-    pbday = input("Enter Patient Date of Birth (dd-mm-yyyy): ")
+    pbday = input("Enter Patient Date of Birth (yyyy-mm-dd): ")
     pcontact = input("Enter Patient Contact Number: ")
     pemail = input("Enter Patient Gmail Address: ")
     pallergies = input("Enter Patient Allergies(If Any): ")
-    p_d.loc[len(p_d.index)] = [pid, pname, plname, pgender, dt.today() , pbday, pcontact, pemail, pallergies]
+    dob = pbday.split('-')
+    age = calculateAge(dt(int(dob[0]), int(dob[1]), int(dob[2])))
+    p_d.loc[len(p_d.index)] = [pid, pname, plname, pgender, dt.today() , pbday, pcontact, pemail, pallergies,age]
 
     # Save the dataframe to the CSV file
     p_d.to_csv('CSV/Patients_Details.csv', index=False)
@@ -40,6 +47,7 @@ def update_patient_details():
         print("4. DOB")
         print("5. Phone")
         print("6. Mail")
+        print("7. Age")
 
         which_info = int(input("Enter Option Number: "))
 
@@ -62,10 +70,15 @@ def update_patient_details():
         elif which_info == 6:
             pemail = input("Enter Updated Patient Gmail Address: ")
             p_d.at[index_to_update, 'Mail'] = pemail
+        elif which_info == 7:
+            page = p_d.at[ index_to_update , 'DOB']
+            dob = page.split('-')
+            age = calculateAge(dt(int(dob[0]), int(dob[1]), int(dob[2])))
+            p_d.at[index_to_update, 'Age'] = age
 
         # Save the dataframe to the CSV file
         p_d.to_csv('CSV/Patients_Details.csv', index=False)
-        print("Patient details updated successfully.")
+        print("Age updated successfully.")
     else:
         print("Patient ID not found. Please enter a valid Patient ID.")
 
@@ -100,11 +113,14 @@ def patient_delete():
 
         
 def graph():
-    v = p_d.groupby('Gender')['Gender'].size()
+    v = p_d.groupby('Age')['Age'].size()
+    print(v.index)
+    print('1 - Patients Age wise \n2 - No of appointments made month wise')
     g_ch = int(input("Kind of Graph you want to see ->"))
     if g_ch == 1:
         plt.bar(v.index, v)
-        plt.title("Number of Patients Gender Wise(Bar)")
+        plt.xticks(v.index)
+        plt.title("Number of Patients age Wise(Bar)")
         plt.show()
 
     elif g_ch == 2:
@@ -152,7 +168,7 @@ def make_book_appointment(appoint):
         no_show = 'No'  # Assuming default value for No-show is 'No'
         
         # Adding the appointment details to the 'Appointment.csv' dataframe
-        appoint.loc[len(appoint.index)] = [pid, pappoint, pd.to_datetime(psch), pd.to_datetime(psch).date(), age, no_show]
+        appoint.loc[len(appoint)] = [pid, pappoint, pd.to_datetime(psch), pd.to_datetime(psch).date(), age, no_show]
 
         # Save the dataframe to the CSV file
         appoint.to_csv('CSV/Appointment.csv', index=False)
