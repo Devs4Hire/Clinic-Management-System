@@ -30,6 +30,7 @@ View, update, or delete existing patient information.
 
 Generate insightful graphs.
 
+#
 Data Files:
 
 Patients_Details.csv: Stores patient data (ID, name, gender, date of birth, contact details, email, allergies, registration date).
@@ -47,12 +48,14 @@ Key Functions: Defines functions for creating, updating, deleting, and managing 
 
 Execution Flow: Starts with admin_login() to prompt for credentials and initiate the application.
 
+#
 Important Notes:
 
 CSV Files: Ensure CSV files are located in the CSV subdirectory.
 
 Password Security: Consider adopting more secure methods (e.g., hashing) for password storage in production environments.
 
+#
 Future Enhancements:
 
 Implement robust error handling to gracefully handle unexpected situations.
@@ -66,6 +69,7 @@ Searching for specific patients.
 Filtering data based on specific criteria.
 
 Generating reports for further analysis.
+
 
 We are actively working on these enhancements to improve the overall functionality and user experience of the Clinic Management System.
 
