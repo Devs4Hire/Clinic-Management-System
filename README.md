@@ -15,9 +15,8 @@ Getting Started:
 
 Install Dependencies:
 
-Bash
 pip install pandas matplotlib
-Use code with caution.
+
 Launch the Application:
 
 Bash
