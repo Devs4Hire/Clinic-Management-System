@@ -2,6 +2,7 @@
 
 
 ✨ Clinic Management System ✨
+
 Welcome! This readme provides a comprehensive overview of the Clinic Management System, designed to streamline patient data management and offer valuable insights.
 
 # Key features
