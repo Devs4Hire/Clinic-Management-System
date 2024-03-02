@@ -19,8 +19,6 @@ Compelling Visualizations: Create impactful graphs with matplotlib to uncover tr
 
 # Getting Started
 
-Usage:
-
 Admin Login: Enter your credentials for secure access.
 
 Explore Options: Utilize the menu to:
